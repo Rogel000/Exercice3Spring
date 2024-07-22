@@ -48,16 +48,18 @@ public class StudentController {
 
     @PostMapping("/add")
     public String saveStudent(@ModelAttribute("student") Student student) {
-        UUID id = UUID.randomUUID();
-        student.setId(id);
-        studentService.addStudent(student);
-        System.out.println(student.getId());
-        System.out.println(student.getName());
-        System.out.println(student.getFirstName());
-        System.out.println(student.getAge());
-        System.out.println(student.getEmail());
+        if (student.getId() == null) {
+            // Ajouter un nouvel étudiant
+            UUID id = UUID.randomUUID();
+            student.setId(id);
+            studentService.addStudent(student);
+        } else {
+            // Mettre à jour l'étudiant existant
+            studentService.updateStudent(student);
+        }
         return "redirect:/list";
     }
+
 
     @GetMapping("/delete/{id}")
     public String deleteStudent(@PathVariable("id") UUID id) {

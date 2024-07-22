@@ -50,4 +50,8 @@ public class StudentService {
     public void deleteStudent(UUID id) {
         students.remove(id);
     }
+    public void updateStudent(Student student) {
+        students.put(student.getId(), student);
+    }
+
 }
