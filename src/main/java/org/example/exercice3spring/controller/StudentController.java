@@ -49,12 +49,12 @@ public class StudentController {
     @PostMapping("/add")
     public String saveStudent(@ModelAttribute("student") Student student) {
         if (student.getId() == null) {
-            // Ajouter un nouvel étudiant
+
             UUID id = UUID.randomUUID();
             student.setId(id);
             studentService.addStudent(student);
         } else {
-            // Mettre à jour l'étudiant existant
+
             studentService.updateStudent(student);
         }
         return "redirect:/list";
