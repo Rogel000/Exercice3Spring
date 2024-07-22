@@ -9,6 +9,28 @@
             crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <title>Student List</title>
+    <style>
+        .navbar-custom {
+            background-color: #343a40;
+        }
+        .navbar-custom .navbar-brand,
+        .navbar-custom .nav-link {
+            color: #ffffff;
+        }
+        .table-container {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .table-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .btn-custom {
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 <header class="navbar navbar-expand-lg navbar-custom">
@@ -21,46 +43,43 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/}"> Home page </a>
+                    <a class="nav-link" th:href="@{/}">Home Page</a>
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/add}">Add Student</a>
+                </li>
             </ul>
         </div>
     </div>
 </header>
-<main class="container">
-    <div class="row my-3">
-        <div class="col-8 offset-2 rounded text-bg-dark p-3">
-            <h1 class="fw-light">- Student List -</h1>
-            <hr>
-            <table class="table table-dark align-middle table-striped text-center">
-                <thead>
+<main class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 table-container">
+            <h1 class="table-header">Student List</h1>
+            <table class="table table-hover table-bordered align-middle text-center">
+                <thead class="table-dark">
                 <tr>
                     <th>Name</th>
                     <th>Firstname</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody th:if="${students != null}">
-
                 <tr th:each="s : ${students}">
                     <td th:text="${s.name}"></td>
                     <td th:text="${s.firstName}"></td>
                     <td>
                         <a th:href="@{/student/{id}(id=${s.getId()})}"
-                           class="btn btn-outline-info"><i class="bi bi-eye"></i> Details</a>
+                           class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i> Details</a>
                     </td>
                 </tr>
                 </tbody>
             </table>
+            <div th:if="${students == null || students.size() == 0}" class="text-center">
+                <p>No students found.</p>
+            </div>
         </div>
     </div>
 </main>
 </body>
 </html>
-
-
-<!--Sur la page Liste des étudiants :-->
-<!--à côté de chaque étudiant (juste le nom et prénom affichés), un lien-->
-<!--ou bouton "voir détails" pour accéder à la page voir détails de-->
-<!--l'étudiant-->
-<!--un lien ou bouton pour revenir à l'accueil-->

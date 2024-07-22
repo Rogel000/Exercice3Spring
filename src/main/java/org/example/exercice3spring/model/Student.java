@@ -15,7 +15,7 @@ public class Student {
     private UUID id;
     private String name;
     private String firstName;
-    private int age;
+    private Integer age;
     private String email;
 
 }

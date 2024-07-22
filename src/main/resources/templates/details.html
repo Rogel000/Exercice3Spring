@@ -9,18 +9,43 @@
             crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <title>Student Details</title>
+    <style>
+        .navbar-custom {
+            background-color: #343a40;
+        }
+        .navbar-custom .navbar-brand,
+        .navbar-custom .nav-link {
+            color: #ffffff;
+        }
+        .card-custom {
+            background-color: #343a40;
+            color: #ffffff;
+            border-radius: 10px;
+        }
+        .card-header-custom {
+            background-color: #495057;
+            border-bottom: 1px solid #6c757d;
+        }
+        .btn-custom {
+            width: 100%;
+            background-color: #198754;
+            border: none;
+            color: #ffffff;
+        }
+    </style>
 </head>
 <body>
 <header class="navbar navbar-expand-lg navbar-custom">
     <div class="container">
         <a class="navbar-brand" href="#">Student Details</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/}">Home page</a>
+                    <a class="nav-link" th:href="@{/}">Home Page</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/list}">Student List</a>
@@ -30,30 +55,35 @@
     </div>
 </header>
 
-<main class="container">
-    <div class="my-3 row">
-        <div class="col-8 offset-2 p-3 rounded bg-dark text-light">
-            <h1 class="fw-light">Student Details</h1>
-
-            <form th:object="${student}">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input class="form-control" type="text" id="name" th:field="*{name}" readonly>
+<main class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card card-custom">
+                <div class="card-header card-header-custom">
+                    <h2 class="fw-light mb-0">Student Details</h2>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label" for="firstName">First Name</label>
-                    <input class="form-control" type="text" id="firstName" th:field="*{firstName}" readonly>
+                <div class="card-body">
+                    <form th:object="${student}">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input class="form-control" type="text" id="name" th:field="*{name}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="firstName">First Name</label>
+                            <input class="form-control" type="text" id="firstName" th:field="*{firstName}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="age">Age</label>
+                            <input class="form-control" type="text" id="age" th:field="*{age}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="email">Email</label>
+                            <input class="form-control" type="text" id="email" th:field="*{email}" readonly>
+                        </div>
+                        <a th:href="@{/list}" class="btn btn-custom mt-3">Back to List</a>
+                    </form>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label" for="age">Age</label>
-                    <input class="form-control" type="text" id="age" th:field="*{age}" readonly>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="email">Email</label>
-                    <input class="form-control" type="text" id="email" th:field="*{email}" readonly>
-                </div>
-                <a th:href="@{/list}" class="btn btn-success">Back to List</a>
-            </form>
+            </div>
         </div>
     </div>
 </main>

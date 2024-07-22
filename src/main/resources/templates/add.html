@@ -9,6 +9,28 @@
             crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <title>Add a Student</title>
+    <style>
+        .navbar-custom {
+            background-color: #343a40;
+        }
+        .navbar-custom .navbar-brand,
+        .navbar-custom .nav-link {
+            color: #ffffff;
+        }
+        .form-container {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .btn-custom {
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 <header class="navbar navbar-expand-lg navbar-custom">
@@ -20,47 +42,43 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/}"> Home page </a>
+                    <a class="nav-link" th:href="@{/}">Home Page</a>
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/list}">List of Students</a>
+                </li>
             </ul>
         </div>
     </div>
 </header>
 
-<main class="container">
-    <div class="my-3 row">
-        <div class="col-8 offset-2 p-3 rounded bg-dark text-light">
-            <h1 class="fw-light">Add a student</h1>
+<main class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 form-container">
+            <h1 class="form-header">Add a Student</h1>
 
             <form th:action="@{/add}" method="post" th:object="${student}">
-                <input th:field="*{id}" hidden>
+                <input th:field="*{id}" type="hidden">
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
-                    <input class="form-control" type="text" id="name" th:field="*{name}">
+                    <input class="form-control" type="text" id="name" th:field="*{name}" placeholder="Enter name">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="firstName">Firstname</label>
-                    <input class="form-control" type="text" id="firstName" th:field="*{firstName}">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input class="form-control" type="text" id="firstName" th:field="*{firstName}" placeholder="Enter first name">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="age">Age </label>
-                    <input class="form-control" type="text" id="age" th:field="*{age}">
+                    <label for="age" class="form-label">Age</label>
+                    <input class="form-control" type="number" id="age" th:field="*{age}" placeholder="Enter age" th:value="${student.age} == 0 ? '' : student.age">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="email">Email</label>
-                    <input class="form-control" type="text" id="email" th:field="*{email}">
+                    <label for="email" class="form-label">Email</label>
+                    <input class="form-control" type="email" id="email" th:field="*{email}" placeholder="Enter email">
                 </div>
-                <button class="btn btn-success">Submit</button>
+                <button type="submit" class="btn btn-success btn-custom">Submit</button>
             </form>
         </div>
     </div>
 </main>
 </body>
 </html>
-
-
-<!--Sur la page Inscription, il sera possible de :-->
-<!--remplir un formulaire et être redirigé vers la page liste des-->
-<!--étudiants-->
-<!--revenir à l'accueil-->
