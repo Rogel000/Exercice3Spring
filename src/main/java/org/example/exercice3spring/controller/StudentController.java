@@ -59,14 +59,14 @@ public class StudentController {
         return "redirect:/list";
     }
 
-    @GetMapping("/delete")
-    public String deleteStudent(@RequestParam("studentId") UUID id) {
+    @GetMapping("/delete/{id}")
+    public String deleteStudent(@PathVariable("id") UUID id) {
         studentService.deleteStudent(id);
         return "redirect:/list";
     }
 
-    @GetMapping("/edit")
-    public String editStudent(@RequestParam("Id") UUID id, Model model) {
+    @GetMapping("/edit/{id}")
+    public String editStudent(@PathVariable("id") UUID id, Model model) {
         Student student = studentService.getStudendById(id);
         model.addAttribute("student", student);
         return "add";
