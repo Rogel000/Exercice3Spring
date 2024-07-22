@@ -58,4 +58,17 @@ public class StudentController {
         System.out.println(student.getEmail());
         return "redirect:/list";
     }
+
+    @GetMapping("/delete")
+    public String deleteStudent(@RequestParam("studentId") UUID id) {
+        studentService.deleteStudent(id);
+        return "redirect:/list";
+    }
+
+    @GetMapping("/edit")
+    public String editStudent(@RequestParam("Id") UUID id, Model model) {
+        Student student = studentService.getStudendById(id);
+        model.addAttribute("student", student);
+        return "add";
+    }
 }

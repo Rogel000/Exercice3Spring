@@ -46,4 +46,8 @@ public class StudentService {
         students.put(student.getId(), student);
 
     }
+
+    public void deleteStudent(UUID id) {
+        students.remove(id);
+    }
 }
