@@ -51,19 +51,21 @@ public class StudentController {
     }
 
     @PostMapping("/add")
-    public String saveStudent(@Valid  @ModelAttribute("student") Student student, BindingResult bindingResult) {
+    public String saveStudent(@Valid @ModelAttribute("student") Student student, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "add";
-        }
-        if (student.getId() == null) {
-
-            UUID id = UUID.randomUUID();
-            student.setId(id);
-            studentService.addStudent(student);
         } else {
+            if (student.getId() == null) {
 
-            studentService.updateStudent(student);
+                UUID id = UUID.randomUUID();
+                student.setId(id);
+                studentService.addStudent(student);
+            } else {
+
+                studentService.updateStudent(student);
+            }
         }
+
         return "redirect:/list";
     }
 
@@ -85,6 +87,7 @@ public class StudentController {
     public String error() {
         if (true) {
             throw new ResponseStatusException(HttpStatus.I_AM_A_TEAPOT);
-        } return "add";
+        }
+        return "add";
     }
 }
