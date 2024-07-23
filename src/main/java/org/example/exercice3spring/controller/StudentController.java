@@ -1,11 +1,15 @@
 package org.example.exercice3spring.controller;
 
 
+import jakarta.validation.Valid;
 import org.example.exercice3spring.model.Student;
 import org.example.exercice3spring.service.StudentService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.UUID;
@@ -47,7 +51,10 @@ public class StudentController {
     }
 
     @PostMapping("/add")
-    public String saveStudent(@ModelAttribute("student") Student student) {
+    public String saveStudent(@Valid  @ModelAttribute("student") Student student, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "add";
+        }
         if (student.getId() == null) {
 
             UUID id = UUID.randomUUID();
@@ -72,5 +79,12 @@ public class StudentController {
         Student student = studentService.getStudendById(id);
         model.addAttribute("student", student);
         return "add";
+    }
+
+    @GetMapping("/teapot")
+    public String error() {
+        if (true) {
+            throw new ResponseStatusException(HttpStatus.I_AM_A_TEAPOT);
+        } return "add";
     }
 }

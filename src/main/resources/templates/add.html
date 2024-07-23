@@ -62,18 +62,22 @@
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
                     <input class="form-control" type="text" id="name" th:field="*{name}" placeholder="Enter name">
+                    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
                 </div>
                 <div class="mb-3">
                     <label for="firstName" class="form-label">First Name</label>
                     <input class="form-control" type="text" id="firstName" th:field="*{firstName}" placeholder="Enter first name">
+                    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
                 </div>
                 <div class="mb-3">
                     <label for="age" class="form-label">Age</label>
                     <input class="form-control" type="number" id="age" th:field="*{age}" placeholder="Enter age" th:value="${student.age} == 0 ? '' : student.age">
+                    <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input class="form-control" type="email" id="email" th:field="*{email}" placeholder="Enter email">
+                    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
                 </div>
                 <button type="submit" class="btn btn-success btn-custom">Submit</button>
             </form>
